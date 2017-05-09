@@ -7,23 +7,32 @@
 //
 
 #import "ViewController.h"
-
+#import "UITextField+shake.h"
 @interface ViewController ()
-
+@property(nonatomic,strong)UITextField *textField;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.textField = [[UITextField alloc]init];
+    self.textField.backgroundColor = [UIColor redColor];
+    self.textField.frame  = CGRectMake(100, 100, 200, 30);
+    self.textField.backgroundColor = [UIColor greenColor];
+    self.textField.text = @"抖动";
+    [self.view addSubview:self.textField];
+
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake( 100, 150, 200, 40);
+    [btn setBackgroundColor:[UIColor greenColor]];
+    [btn setTitle:@"点击抖动" forState:UIControlStateNormal];
+    [self.view addSubview:btn];
+    [btn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
+    
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)click{
+    [self.textField shake];
 }
-
 
 @end
